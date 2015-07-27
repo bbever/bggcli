@@ -6,7 +6,7 @@ collection. Only the fields defined in the file will be updated.
 
 Usage: bggcli [-v] -l <login> -p <password>
               [-c <name>=<value>]...
-              collection-import-simple <file>
+              collection-import <file>
 
 Options:
     -v                              Activate verbose logging
@@ -39,13 +39,13 @@ def execute(args, options):
     csv_reader = CsvReader(file_path)
     csv_reader.open()
 
-    Logger.info("Importing games (Simple Mode) for '%s' account..." % login)
+    Logger.info("Importing games for '%s' account..." % login)
 
-    with WebDriver('collection-import-simple', args, options) as web_driver:
+    with WebDriver('collection-import', args, options) as web_driver:
         if not LoginPage(web_driver.driver).authenticate(login, args['--password']):
             sys.exit(1)
 
-        Logger.info("Importing %s games (Simple Mode)..." % csv_reader.rowCount)
+        Logger.info("Importing %s games..." % csv_reader.rowCount)
         game_page = GamePage(web_driver.driver)
-        csv_reader.iterate(lambda row: game_page.update_simple(row))
+        csv_reader.iterate(lambda row: game_page.update(row))
         Logger.info("Import has finished.")
