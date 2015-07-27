@@ -138,7 +138,12 @@ class GamePage(BasePage):
         """
         self.goto(game_attrs)
 
-        self.driver.get("javascript:void(CE_ModuleAddItem({objecttype:'thing',objectid:'%s',addowned:'true',instanceid:'21'}))" % (game_attrs['objectid']))
+        try:
+            self.itemEl = self.driver.find_element_by_xpath(
+                "//table[@class='collectionmodule_table']")
+            Logger.info(" (already in collection)", append=True, break_line=False)
+        except NoSuchElementException:
+            self.driver.get("javascript:void(CE_ModuleAddItem({objecttype:'thing',objectid:'%s',addowned:'true',instanceid:'21'}))" % (game_attrs['objectid']))
 
     def delete(self, game_attrs):
         """
