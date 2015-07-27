@@ -128,6 +128,18 @@ class GamePage(BasePage):
             self.wait.until(EC.element_to_be_clickable(
                 (By.XPATH, ".//td[@class='collection_versionmod editfield']")))
 
+    def update_simple(self, game_attrs):
+        """
+        Added by bbever (07/27/15)
+        Update game details using simple mode.
+        Wont update details, simply adds item to collection.
+
+        :param game_attrs: Game attributes as a dictionary
+        """
+        self.goto(game_attrs)
+
+        self.driver.get("javascript:void(CE_ModuleAddItem({objecttype:'thing',objectid:'%s',addowned:'true',instanceid:'21'}))" % (game_attrs['objectid']))
+
     def delete(self, game_attrs):
         """
         Delete a game in the collection

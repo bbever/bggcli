@@ -20,10 +20,11 @@ Advanced options:
                                     profile (useful for debugging purpose)
 
 Available commands are:
-   help                 Display general help or help for a specific command
-   collection-import    Import a game collection from a CSV file
-   collection-export    Export a game collection as a CSV file
-   collection-delete    Delete games in a collection
+   help                     Display general help or help for a specific command
+   collection-import        Import a game collection from a CSV file
+   collection-import-simple Import a game collection from a CSV file (Simple mode)
+   collection-export        Export a game collection as a CSV file
+   collection-delete        Delete games in a collection
 
 See 'bggcli help <command>' for more information on a specific command.
 """
